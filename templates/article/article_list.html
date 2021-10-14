@@ -1,0 +1,29 @@
+<!--상속-->
+{% extends 'base.html' %}
+<!--{% load windup_filter %}-->
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/article.css' %}">
+<div class="header">
+        <h1>뉴스</h1>
+    </div>
+    <div class="container">
+        {% if article_list %}
+        <ul class="list">
+            {% for article in article_list %}
+            <li class="item">
+                <h3><a href="" style="color: black">{{ article.article_title }}</a></h3>
+                <div class="info">
+                    <div class="written_time"><span>작성한 날짜 | </span>{{ article.written_time }}</div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <li>
+          <div class="title">기사가 없습니다.</div>
+        </li>
+        {% endif %}
+</div>
+{% endblock %}

@@ -18,6 +18,7 @@ from django.urls import path, include
 from home.views import base_views
 
 urlpatterns = [
+    path('article/', include('article.urls')),
     path('admin/', admin.site.urls),
     path('post/', include('post.urls')),
     path('calender/', include('calender.urls')),

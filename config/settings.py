@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'common.apps.CommonConfig',
     'post.apps.PostConfig',
     'calender.apps.CalenderConfig',
+    'article.apps.ArticleConfig',
     'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
