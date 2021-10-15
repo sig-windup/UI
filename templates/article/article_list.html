@@ -5,9 +5,21 @@
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/article.css' %}">
-<div class="header">
+    <div class="header">
         <h1>뉴스</h1>
     </div>
+
+    <div>
+    <form method="get" action="" class="form"  style="margin-left: 80%; margin-top: 2%;">
+      <select name="team" id="id_team">
+        <option value="전체" selected>전체</option>
+        <option value="삼성">삼성</option>
+        <option value="롯데">롯데</option>
+        <option value="NC">NC</option>
+      </select>
+    </form>
+    </div>
+
     <div class="container">
         {% if article_list %}
         <ul class="list">
@@ -26,4 +38,16 @@
         </li>
         {% endif %}
 </div>
+
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        $( "select[name=team]" ).val( "{{ team_text }}" );
+        $('select[name=team]').change(function () {
+        console.log($('select[name=team]').val());
+        month = $('select[name=team]').val();
+        $('.form').submit();
+    });
+});
+</script>
 {% endblock %}
