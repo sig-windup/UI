@@ -9,15 +9,15 @@
         <h1>뉴스</h1>
     </div>
 
-    <div>
-    <form method="get" action="" class="form"  style="margin-left: 80%; margin-top: 2%;">
-      <select name="team" id="id_team">
-        <option value="전체" selected>전체</option>
-        <option value="삼성">삼성</option>
-        <option value="롯데">롯데</option>
-        <option value="NC">NC</option>
+    <form method="get" action="" class="form" >
+        <div style="margin-left: 80%; margin-top: 2%;">
+        팀 선택
+      <select name="team" id="id_team" onchange="location = this.value;">
+        <option class="전체" value="?team=전체" >전체</option>
+        <option class="삼성" value="?team=삼성">삼성</option>
+        <option class="롯데" value="?team=롯데">롯데</option>
+        <option class="NC" value="?team=NC">NC</option>
       </select>
-    </form>
     </div>
 
     <div class="container">
@@ -37,17 +37,48 @@
           <div class="title">기사가 없습니다.</div>
         </li>
         {% endif %}
-</div>
+    </div>
+
+    <div>
+        <ul class="bottomDateList" style="list-style:none; margin-left: 18%;">
+            {% for date in dates %}
+            <li class="date" style="display: inline;">
+                <a id ="date" href="{% url 'article:article_list' %}?team=전체&date={{ date | urlencode }}" style="color: black">{{ date }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </form>
 
 <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/article.js' %}"></script>
 <script>
-    $(document).ready(function() {
-        $( "select[name=team]" ).val( "{{ team_text }}" );
-        $('select[name=team]').change(function () {
-        console.log($('select[name=team]').val());
-        month = $('select[name=team]').val();
-        $('.form').submit();
-    });
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+$(document).ready(function(){
+  var team = getUrlParameter('team');
+  if(team == '삼성'){
+    $('.삼성').prop('selected', 'selected')
+  }else if(team == '롯데'){
+    $('.롯데').prop('selected', 'selected')
+  }else if(team == 'NC'){
+    $('.NC').prop('selected', 'selected')
+  }else{
+    $('.전체').prop('selected', 'selected')
+  }
 });
 </script>
+
 {% endblock %}
