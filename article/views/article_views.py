@@ -14,17 +14,23 @@ def article_list(request):
     """
     article 출력
     """
-    team_text = request.GET.get('team','')
+
+    team_text = request.GET.get('team')
     date = request.GET.get('date')
     dates = date_range()
 
     #dates[4] = 현재 날짜
-    if(team_text != '전체' and team_text != None):
-        article_list = Article.objects.filter(article_team=team_text, written_time=dates[4])
-    elif(date == None):
+    if(team_text != '전체' and team_text != None and date != None):
+        article_list = Article.objects.filter(article_team=team_text, written_time=date)
+    #팀만 선택할 경우 기본 값으로 오늘로 가게된다.
+    elif(team_text == None and date == None):
         article_list = Article.objects.filter(written_time=dates[4])
-    else:
+    elif(team_text == '전체' and date == None):
+        article_list = Article.objects.filter(written_time=dates[4])
+    elif(team_text == '전체' and date != None):
         article_list = Article.objects.filter(written_time=date)
+    else:
+        article_list = Article.objects.filter(article_team=team_text, written_time=dates[4])
 
     context = {
         'team_text': team_text,

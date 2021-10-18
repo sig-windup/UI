@@ -43,7 +43,7 @@
         <ul class="bottomDateList" style="list-style:none; margin-left: 18%;">
             {% for date in dates %}
             <li class="date" style="display: inline;">
-                <a id ="date" href="{% url 'article:article_list' %}?team=전체&date={{ date | urlencode }}" style="color: black">{{ date }}</a>
+                <a id ="date" href="{% url 'article:article_list' %}?team={{ team_text }}&date={{ date | urlencode }}" style="color: black">{{ date }}</a>
             </li>
             {% endfor %}
         </ul>
