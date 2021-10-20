@@ -26,16 +26,16 @@ def article_list(request):
 
     #dates[4] = 현재 날짜
     if(team_text != '전체' and team_text != None and date != None):
-        article = Article.objects.filter(article_team=team_text, written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0])
+        article = Article.objects.filter(article_team=team_text, written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0]).order_by('-written_time')
     #팀만 선택할 경우 기본 값으로 오늘로 가게된다.
     elif(team_text == None and date == None):
-        article = Article.objects.filter(written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0])
+        article = Article.objects.filter(written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0]).order_by('-written_time')
     elif(team_text == '전체' and date == None):
-        article = Article.objects.filter(written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0])
+        article = Article.objects.filter(written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0]).order_by('-written_time')
     elif(team_text == '전체' and date != None):
-        article = Article.objects.filter(written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0])
+        article = Article.objects.filter(written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0]).order_by('-written_time')
     else:
-        article = Article.objects.filter(article_team=team_text, written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0])
+        article = Article.objects.filter(article_team=team_text, written_time__day=date_split[2], written_time__month=date_split[1], written_time__year=date_split[0]).order_by('-written_time')
 
     #페이지네이션
     paginator = Paginator(article, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
