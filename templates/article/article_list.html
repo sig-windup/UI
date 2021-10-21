@@ -35,7 +35,7 @@
                 <h3><a href="{{article.article_url}}" style="color: black">{{ article.article_title }}</a></h3>
                 <div class="info">
                     <div class="written_team"><span>구단 | </span>{{ article.article_team }}</div>
-                    <div class="written_time"><span>작성한 날짜 | </span>{{ article.written_time }}</div>
+                    <div class="written_time"><span>작성한 날짜 | </span>{{ article.written_date|slice:"4:6"}}월 {{ article.written_date|slice:"6:8"}}일 {{ article.written_time }}</div>
                 </div>
             </li>
             {% endfor %}

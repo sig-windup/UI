@@ -6,7 +6,8 @@ class Article(models.Model):
     #현재 모델간의 연관관계가 없기에 int로 박아넣음
     article_team = models.CharField(max_length=20)
     article_title = models.TextField()
-    written_time = models.DateTimeField()
+    written_date = models.CharField(max_length=50, null=True)
+    written_time = models.CharField(max_length=50, null=True)
     #article_content = models.TextField()
     article_url = models.TextField(null=True)
     #keyword = models.TextField()
