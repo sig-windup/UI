@@ -7,5 +7,5 @@ app_name = 'article'
 
 urlpatterns = [
     # article_views.py
-    path('article/list/', article_views.article_list, name='article_list'),
+    path('list/', article_views.article_list, name='article_list'),
 ]

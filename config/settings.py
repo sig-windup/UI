@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'calender.apps.CalenderConfig',
     'article.apps.ArticleConfig',
     'home.apps.HomeConfig',
+    'manager.apps.ManagerConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

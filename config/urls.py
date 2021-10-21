@@ -24,5 +24,6 @@ urlpatterns = [
     path('calender/', include('calender.urls')),
     path('common/', include('common.urls')),
     path('home/', include('home.urls')),
+    path('manager/', include('manager.urls')),
     path('', base_views.index, name='index'),  # '/' 에 해당되는 path
 ]
