@@ -8,7 +8,7 @@ class Article(models.Model):
     article_title = models.TextField()
     written_date = models.CharField(max_length=50, null=True)
     written_time = models.CharField(max_length=50, null=True)
-    #article_content = models.TextField()
+    article_content = models.TextField(null=True)
     article_url = models.TextField(null=True)
     #keyword = models.TextField()
 

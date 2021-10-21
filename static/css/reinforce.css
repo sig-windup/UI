@@ -1,0 +1,13 @@
+        *{margin: 0;padding: 0;}
+
+        ul{ list-style: none;}
+
+       .wrapper{width: 300px;height: 200px; margin:100px auto;overflow: hidden;border: 2px solid #ccc;position: relative;}
+
+        .scroll{width: 205px;margin: 0 auto; overflow: hidden;}
+
+       .scroll li{float: left; margin: 5px; height:160px; font-size:60px; text-align:center; line-height:100px; font-weight:800; background:#FF3F00; color:#fff; width:200px;}
+
+        .prev,.next{ width: 30px;height: 30px;background: #daa520;color: #fff;cursor: pointer;position: absolute;top:80px; text-align: center;line-height: 30px;}
+
+        .next{ right: 0;}

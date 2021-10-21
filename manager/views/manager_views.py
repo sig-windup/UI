@@ -1,12 +1,8 @@
 from django.core.paginator import Paginator
-from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.dateformat import DateFormat
 from datetime import datetime, timedelta
 from article.models import Article
-from django.contrib import messages
-
 
 def date_range():
     today = DateFormat(datetime.now()).format('ymd')
@@ -58,8 +54,9 @@ def reinforce(request,article_id):
 
     print(article_id)
     article = get_object_or_404(Article, pk=article_id)
+    article_texts = article.article_content.split('.')
     context = {
-        'article': article,
+        'article_texts': article_texts,
      }
     return render(request, 'manager/manager_reinforce.html', context)
 
