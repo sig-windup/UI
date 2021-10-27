@@ -2,7 +2,12 @@
 {% extends 'manager_base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/reinforce.css' %}">
+<link rel="stylesheet" href="/static/css/reinforce.css?we">
+
+<div class="title">
+    <h1>{{article.article_title}}</h1>
+</div>
+
 <div class="wrapper">
 
     <span class="prev">《</span>
@@ -18,6 +23,12 @@
             {% endfor %}
         </ul>
     </div>
+</div>
+
+<div class="reinforce">
+    <input type="button" class="pos" name="{{ article.id }}" value="긍정">
+    <input type="button" class="fence" name="{{ article.id }}" value="중립">
+    <input type="button" class="neg" name="{{ article.id }}" value="부정">
 </div>
 
 <script src="{% static 'jquery-3.6.0.min.js' %}"></script>

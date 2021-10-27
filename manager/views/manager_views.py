@@ -57,6 +57,7 @@ def reinforce(request,article_id):
     article_texts = article.article_content.split('.')
     context = {
         'article_texts': article_texts,
+        'article': article,
      }
     return render(request, 'manager/manager_reinforce.html', context)
 
