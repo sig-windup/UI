@@ -1,14 +1,17 @@
 from django.contrib import admin
 from django.db import models
 
-class Article(models.Model):
-    #현재 주석처리 된 건 추후에 추가예정
-    #현재 모델간의 연관관계가 없기에 int로 박아넣음
-    article_team = models.CharField(max_length=20)
-    article_title = models.TextField()
-    written_date = models.CharField(max_length=50, null=True)
-    written_time = models.CharField(max_length=50, null=True)
-    article_content = models.TextField(null=True)
-    article_url = models.TextField(null=True)
-    #keyword = models.TextField()
+class Articles(models.Model):
+    id = models.TextField(db_column='_id', primary_key=True)
+    url = models.CharField(db_column='url', max_length=500)  # Field name made lowercase.
+    team = models.CharField(db_column='team', max_length=10)  # Field name made lowercase.
+    date = models.CharField(db_column='date', max_length=10)  # Field name made lowercase.
+    time = models.CharField(db_column='time', max_length=50)  # Field name made lowercase.
+    publisher = models.CharField(db_column='publisher', max_length=50)  # Field name made lowercase.
+    journalist = models.CharField(db_column='journalist', max_length=50)  # Field name made lowercase.
+    title = models.CharField(db_column='title', max_length=200)  # Field name made lowercase.
+    content = models.CharField(db_column='content', max_length=5000)  # Field name made lowercase.
 
+    class Meta:
+        managed = False
+        db_table = 'articles'

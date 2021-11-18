@@ -1,6 +1,5 @@
 <!--상속-->
 {% extends 'base.html' %}
-<!--{% load windup_filter %}-->
 {% load static %}
 {% block content %}
 
@@ -32,10 +31,10 @@
         <ul class="list">
             {% for article in article_list %}
             <li class="item">
-                <h3><a href="{{article.article_url}}" style="color: black">{{ article.article_title }}</a></h3>
+                <h3><a href="{{article.url}}" style="color: black">{{ article.title }}</a></h3>
                 <div class="info">
-                    <div class="written_team"><span>구단 | </span>{{ article.article_team }}</div>
-                    <div class="written_time"><span>작성한 날짜 | </span>{{ article.written_date|slice:"4:6"}}월 {{ article.written_date|slice:"6:8"}}일 {{ article.written_time }}</div>
+                    <div class="written_team"><span>구단 | </span>{{ article.team }}</div>
+                    <div class="written_time"><span>작성한 날짜 | </span>{{ article.date|slice:"4:6"}}월 {{ article.date|slice:"6:8"}}일 {{ article.time }}</div>
                 </div>
             </li>
             {% endfor %}
@@ -52,7 +51,7 @@
             <!-- 이전페이지 -->
             {% if article_list.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="{% url 'article:article_list' %}?&page={{ article_list.previous_page_number }}">이전</a>
+                <a class="page-link" href="{% url 'article:article_list' %}?team={{ team_text }}&date={{ date | urlencode }}&page={{ article_list.previous_page_number }}">이전</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -63,18 +62,18 @@
             {% for page_number in article_list.paginator.page_range %}
             {% if page_number == article_list.number %}
             <li class="page-item active" aria-current="page">
-                <a class="page-link" href="{% url 'article:article_list' %}?&page={{ page_number }}">{{ page_number }}</a>
+                <a class="page-link" href="{% url 'article:article_list' %}?team={{ team_text }}&date={{ date | urlencode }}&page={{ page_number }}">{{ page_number }}</a>
             </li>
             {% else %}
             <li class="page-item">
-                <a class="page-link" href="{% url 'article:article_list' %}?&page={{ page_number }}">{{ page_number }}</a>
+                <a class="page-link" href="{% url 'article:article_list' %}?team={{ team_text }}&date={{ date | urlencode }}&page={{ page_number }}">{{ page_number }}</a>
             </li>
             {% endif %}
             {% endfor %}
             <!-- 다음페이지 -->
             {% if article_list.has_next %}
             <li class="page-item">
-                <a class="page-link" href="{% url 'article:article_list' %}?&page={{ article_list.next_page_number }}">다음</a>
+                <a class="page-link" href="{% url 'article:article_list' %}?team={{ team_text }}&date={{ date | urlencode }}&page={{ article_list.next_page_number }}">다음</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -113,18 +112,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-$(document).ready(function(){
-  var team = getUrlParameter('team');
-  if(team == '삼성'){
-    $('.삼성').prop('selected', 'selected')
-  }else if(team == '롯데'){
-    $('.롯데').prop('selected', 'selected')
-  }else if(team == 'NC'){
-    $('.NC').prop('selected', 'selected')
-  }else{
-    $('.전체').prop('selected', 'selected')
-  }
-});
 </script>
 
 {% endblock %}

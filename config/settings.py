@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'common.apps.CommonConfig',
-    'post.apps.PostConfig',
     'calender.apps.CalenderConfig',
     'article.apps.ArticleConfig',
     'home.apps.HomeConfig',
@@ -79,12 +78,28 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'windup',
+        'CLIENT': {
+            'host': '114.129.200.203',
+            'port': 28018,
+            'username': 'windup_dba',
+            'password': 'lotsamhwa',
+            'authSource': 'admin',
+            'authMechanism': 'DEFAULT'
+        }
     }
 }
+
 
 
 # Password validation
@@ -127,6 +142,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 로그인 성공후 이동하는 URL
 LOGIN_REDIRECT_URL = '/'

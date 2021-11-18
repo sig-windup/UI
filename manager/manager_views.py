@@ -1,9 +1,8 @@
 from django.core.paginator import Paginator
-from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-from article.models import Article
-from datetime import datetime, timedelta
 from django.utils.dateformat import DateFormat
+from datetime import datetime, timedelta
+from article.models import Articles
 
 def date_range():
     today = DateFormat(datetime.now()).format('ymd')
@@ -18,6 +17,7 @@ def article_list(request):
     page = request.GET.get('page','1') #GET 방식으로 정보를 받아오는 데이터
     team_text = request.GET.get('team')
     date = request.GET.get('date')
+    print(date)
     dates = date_range()
     if(date != None):
         date_conver = date.replace("-","")
@@ -26,16 +26,16 @@ def article_list(request):
 
     #dates[4] = 현재 날짜
     if(team_text != '전체' and team_text != None and date != None):
-        article = Article.objects.filter(article_team=team_text,written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(team=team_text,date=date_conver).order_by('-written_time')
     #팀만 선택할 경우 기본 값으로 오늘로 가게된다.
     elif(team_text == None and date == None):
-        article = Article.objects.filter(written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(date=date_conver).order_by('-written_time')
     elif(team_text == '전체' and date == None):
-        article = Article.objects.filter(written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(date=date_conver).order_by('-written_time')
     elif(team_text == '전체' and date != None):
-        article = Article.objects.filter(written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(date=date_conver).order_by('-written_time')
     else:
-        article = Article.objects.filter(article_team=team_text, written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(team=team_text, date=date_conver).order_by('-written_time')
 
     #페이지네이션
     paginator = Paginator(article, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
@@ -47,4 +47,18 @@ def article_list(request):
         'dates': dates,
      }
 
-    return render(request, 'article/article_list.html', context)
+    return render(request, 'manager/manager_articleList.html', context)
+
+#강화학습
+def reinforce(request,article_id):
+
+    print(article_id)
+    article = get_object_or_404(Articles, pk=article_id)
+    article_texts = article.article_content.split('.')
+    context = {
+        'article_texts': article_texts,
+        'article': article,
+     }
+    return render(request, 'manager/manager_reinforce.html', context)
+
+

@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.dateformat import DateFormat
+from article.models import Articles
 from datetime import datetime, timedelta
-from article.models import Article
+from django.utils.dateformat import DateFormat
 
 def date_range():
     today = DateFormat(datetime.now()).format('ymd')
@@ -14,7 +15,6 @@ def article_list(request):
     """
     article 출력
     """
-    print("dsdsds")
     page = request.GET.get('page','1') #GET 방식으로 정보를 받아오는 데이터
     team_text = request.GET.get('team')
     date = request.GET.get('date')
@@ -26,16 +26,16 @@ def article_list(request):
 
     #dates[4] = 현재 날짜
     if(team_text != '전체' and team_text != None and date != None):
-        article = Article.objects.filter(article_team=team_text,written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(team=team_text,date=date_conver).order_by('-date')
     #팀만 선택할 경우 기본 값으로 오늘로 가게된다.
     elif(team_text == None and date == None):
-        article = Article.objects.filter(written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(date=date_conver).order_by('-date')
     elif(team_text == '전체' and date == None):
-        article = Article.objects.filter(written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(date=date_conver).order_by('-date')
     elif(team_text == '전체' and date != None):
-        article = Article.objects.filter(written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(date=date_conver).order_by('-date')
     else:
-        article = Article.objects.filter(article_team=team_text, written_date=date_conver).order_by('-written_time')
+        article = Articles.objects.filter(team=team_text, date=date_conver).order_by('-date')
 
     #페이지네이션
     paginator = Paginator(article, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
@@ -45,20 +45,7 @@ def article_list(request):
         'team_text': team_text,
         'article_list': article_list,
         'dates': dates,
+        'date': date,
      }
 
-    return render(request, 'manager/manager_articleList.html', context)
-
-#강화학습
-def reinforce(request,article_id):
-
-    print(article_id)
-    article = get_object_or_404(Article, pk=article_id)
-    article_texts = article.article_content.split('.')
-    context = {
-        'article_texts': article_texts,
-        'article': article,
-     }
-    return render(request, 'manager/manager_reinforce.html', context)
-
-
+    return render(request, 'article/article_list.html', context)

@@ -1,6 +1,5 @@
 <!--상속-->
 {% extends 'manager_base.html' %}
-<!--{% load windup_filter %}-->
 {% load static %}
 {% block content %}
 
@@ -83,7 +82,7 @@
         </ul>
     </div>
     <!-- 페이징처리 끝 -->
-
+    <!--  날짜는 했는데 쿼리스트링을 못하겠음-->
     <div>
         <ul class="bottomDateList" style="list-style:none; margin-left: 18%;">
             {% for date in dates %}
@@ -103,7 +102,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;
-
     for (i = 0; i < sURLVariables.length; i++) {
         sParameterName = sURLVariables[i].split('=');
 
@@ -112,18 +110,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
-$(document).ready(function(){
-  var team = getUrlParameter('team');
-  if(team == '삼성'){
-    $('.삼성').prop('selected', 'selected')
-  }else if(team == '롯데'){
-    $('.롯데').prop('selected', 'selected')
-  }else if(team == 'NC'){
-    $('.NC').prop('selected', 'selected')
-  }else{
-    $('.전체').prop('selected', 'selected')
-  }
-});
 </script>
 
 {% endblock %}

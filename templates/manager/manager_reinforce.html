@@ -26,9 +26,9 @@
 </div>
 
 <div class="reinforce">
-    <input type="button" class="pos" name="{{ article.id }}" value="긍정">
-    <input type="button" class="fence" name="{{ article.id }}" value="중립">
-    <input type="button" class="neg" name="{{ article.id }}" value="부정">
+    <input type="button"  id="pos" onclick="colorChange1()" class="pos" name="{{ article.id }}" value="긍정">
+    <input type="button"  id="fence" onclick="colorChange2()" class="fence" name="{{ article.id }}" value="중립">
+    <input type="button"  id="neg" onclick="colorChange3()" class="neg" name="{{ article.id }}" value="부정">
 </div>
 
 <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
@@ -57,8 +57,36 @@
         }
         oPrev.bind('click',Prev);
         oNext.bind('click',Next);
-
     })
+
+</script>
+<script>
+    function colorChange1(){
+    var posTag = document.getElementById("pos");
+    var fenceTag = document.getElementById("fence");
+    var negTag = document.getElementById("neg");
+    posTag.style.backgroundColor = "#9E8AEF";
+    fenceTag.style.backgroundColor = "#EFEFEF";
+    negTag.style.backgroundColor = "#EFEFEF";
+    }
+
+    function colorChange2(){
+    var posTag = document.getElementById("pos");
+    var fenceTag = document.getElementById("fence");
+    var negTag = document.getElementById("neg");
+    posTag.style.backgroundColor = "#EFEFEF";
+    fenceTag.style.backgroundColor = "#9E8AEF";
+    negTag.style.backgroundColor = "#EFEFEF";
+    }
+
+    function colorChange3(){
+    var posTag = document.getElementById("pos");
+    var fenceTag = document.getElementById("fence");
+    var negTag = document.getElementById("neg");
+    posTag.style.backgroundColor = "#EFEFEF";
+    fenceTag.style.backgroundColor = "#EFEFEF";
+    negTag.style.backgroundColor = "#9E8AEF";
+    }
 </script>
 
 {% endblock %}
